@@ -40,15 +40,28 @@
             }
         </style>
         <script>
-            class CommandLine{
+            class CommandLine{            
                 static parseCommand(event){
                     if(event.keyCode==13){
                         event.preventDefault();
                         CommandLine.sendCommand(event.srcElement.value)
                         event.srcElement.value = "";
                     }
+                    if(event.keyCode==38){
+                        event.preventDefault();
+                        CommandLine.historyindex += 1;
+                        CommandLine.historyindex = Math.min(CommandLine.historyindex, CommandLine.commandhistory.length -1 );
+                        CommandLine.loadHistoryCommand();
+                    }
+                    if(event.keyCode==40){
+                        event.preventDefault();
+                        CommandLine.historyindex -= 1;
+                        CommandLine.historyindex = Math.max(-1, CommandLine.historyindex);
+                        CommandLine.loadHistoryCommand();
+                    }
                 }
                 static sendCommand(command){
+                    CommandLine.commandhistory.unshift(command);
                     let xhttp = new XMLHttpRequest();
                     xhttp.onreadystatechange = function() {
                         if (this.readyState == 4 && this.status == 200) {
@@ -63,7 +76,15 @@
                 static print(content){
                     document.getElementById("content").innerHTML += "<br>"+content;
                 }
+                static loadHistoryCommand(){
+                    if(CommandLine.historyindex==-1) document.getElementsByTagName('textarea')[0].value = "";
+                    else document.getElementsByTagName('textarea')[0].value = CommandLine.commandhistory[CommandLine.historyindex];
+                    document.getElementsByTagName('textarea')[0].focus();
+                    document.getElementsByTagName('textarea')[0].setSelectionRange(document.getElementsByTagName('textarea')[0].value.length,document.getElementsByTagName('textarea')[0].value.length);
+                }
             }
+            CommandLine.commandhistory = []; 
+            CommandLine.historyindex = -1; 
         </script>
     </head>
     <body onclick="document.getElementsByTagName('textarea')[0].focus();">
