@@ -21,7 +21,7 @@ once followed the steps above, simply open the url of the directory in a browser
 ## building own programs
 you can build (or link) your own programs by creating a dir in the /commandline/programs/ with the name of you program. This dir should countain a init.php file with a method named after following scheme: 
 
-```
+```php
 function [yourprogramname]Main($args, $command) {
   lCommand::write("> $command");
 }
