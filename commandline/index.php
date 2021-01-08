@@ -4,7 +4,7 @@ header("Content-Type: text/json;");
 
 lConnection::init();
 
-$command = (isset($_GET["command"]) and $_GET["command"]!="") ? $_GET["command"] : null;
+$command = (isset($_GET["command"]) and $_GET["command"]!="") ? trim($_GET["command"]) : null;
 if($command!=null){
     lCommand::addToStack($command);
 }

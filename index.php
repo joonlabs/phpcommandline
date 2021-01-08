@@ -32,6 +32,7 @@
                 font-family: "Menlo", "Raster Fonts", "Monospace"; 
             }
             .input{
+                width: calc(100% - 48px);
                 position: absolute; 
                 bottom: 16px;
             }
@@ -46,6 +47,7 @@
                         event.preventDefault();
                         CommandLine.sendCommand(event.srcElement.value)
                         event.srcElement.value = "";
+                        CommandLine.historyindex = -1; 
                     }
                     if(event.keyCode==38){
                         event.preventDefault();
