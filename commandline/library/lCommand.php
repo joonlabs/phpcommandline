@@ -48,6 +48,7 @@
             $args = array_slice($splits, 1);
             
             // call command
+            if($command=="") return;
             if(lConnection::isAuthorized() or $program=="login"){
                 if(file_exists("programms/$program/init.php")){
                     require_once("programms/$program/init.php");

@@ -19,8 +19,8 @@
                     lCommand::write("welcome, ".$username);
                 }else{
                     lCommand::write("not authorized");
-                    lCommand::addToStack("login");
-                    lCommand::performNextCommand();
+//                    lCommand::addToStack("login");
+//                    lCommand::performNextCommand();
                 }
             }            
         }

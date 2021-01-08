@@ -6,10 +6,11 @@ lConnection::init();
 
 $command = (isset($_GET["command"]) and $_GET["command"]!="") ? trim($_GET["command"]) : null;
 if($command!=null){
-    lCommand::addToStack($command);
-}
-if(!lConnection::isAuthorized()){
-    lCommand::addToStackIfNotExists("login");
+    if($command=="init"){
+        if(!lConnection::isAuthorized()) lCommand::write("welcome to the php command line. please login via the command \"login\"");
+    }else{
+        lCommand::addToStack($command);
+    }
 }
 
 lCommand::performNextCommand();

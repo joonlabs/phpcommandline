@@ -63,6 +63,7 @@
                     }
                 }
                 static sendCommand(command){
+                    console.log(command);
                     CommandLine.commandhistory.unshift(command);
                     let xhttp = new XMLHttpRequest();
                     xhttp.onreadystatechange = function() {
@@ -72,7 +73,7 @@
                             CommandLine.print(answer["return"]);
                         }
                     };
-                    xhttp.open("GET", "commandline/?command="+encodeURI(command), true);
+                    xhttp.open("GET", "commandline/?command="+encodeURIComponent(command), true);
                     xhttp.send();
                 }
                 static print(content){
@@ -87,6 +88,7 @@
             }
             CommandLine.commandhistory = []; 
             CommandLine.historyindex = -1; 
+            CommandLine.sendCommand("init");
         </script>
     </head>
     <body onclick="document.getElementsByTagName('textarea')[0].focus();">
