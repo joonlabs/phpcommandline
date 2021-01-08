@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <html>
     <head>
         <title>Command Line</title>
@@ -62,9 +58,8 @@
                         CommandLine.loadHistoryCommand();
                     }
                 }
-                static sendCommand(command){
-                    console.log(command);
-                    CommandLine.commandhistory.unshift(command);
+                static sendCommand(command, pushToStack=true){
+                    if(pushToStack) CommandLine.commandhistory.unshift(command);
                     let xhttp = new XMLHttpRequest();
                     xhttp.onreadystatechange = function() {
                         if (this.readyState == 4 && this.status == 200) {
@@ -88,10 +83,10 @@
             }
             CommandLine.commandhistory = []; 
             CommandLine.historyindex = -1; 
-            CommandLine.sendCommand("init");
+            CommandLine.sendCommand("init", false);
         </script>
     </head>
-    <body onclick="document.getElementsByTagName('textarea')[0].focus();">
+    <body ondblclick="document.getElementsByTagName('textarea')[0].focus();">
         <div id="content" class="content"></div>
         <div class="input"><span>$</span><textarea autofocus rows="1" onkeydown="CommandLine.parseCommand(event);"></textarea></div>
     </body>
