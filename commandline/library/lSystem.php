@@ -27,6 +27,13 @@ abstract class lSystem{
     /*
      * returns the if a file exists
      */
+    static function isFile($file){
+        return is_file($file);
+    }
+
+    /*
+     * returns the if a file exists
+     */
     static function dirExists($dir){
         return is_dir($dir);
     }
