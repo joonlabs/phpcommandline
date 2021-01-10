@@ -12,11 +12,18 @@ When installed, the tool does not provide any logins. However you can simply add
 once followed the steps above, simply open the url of the directory in a browser and type ```login```. You can now login with the username and password created above.  
 
 ## preinstalled programs:
+- cd 
 - echo
+- exit
 - help
 - login
 - logout
+- ls
+- more
+- pwd
 - reset
+- rm
+- toich
 
 ## building own programs
 you can build (or link) your own programs by creating a dir in the /commandline/programs/ with the name of you program. This dir should countain a init.php file with a method named after following scheme: 
