@@ -8,7 +8,7 @@
         }
         
         static function get($key){
-            if(isset($_SESSION["phpcommandline"]["storage"][lStorage::$program])){
+            if(isset($_SESSION["phpcommandline"]["storage"][lStorage::$program][$key])){
                 return $_SESSION["phpcommandline"]["storage"][lStorage::$program][$key];
             }
             return null;
