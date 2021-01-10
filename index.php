@@ -14,6 +14,9 @@
             #content{
                 position: absolute;
                 bottom: 50px;
+                max-height: calc(100vh - 50px);
+                overflow: auto;
+                width: calc(100% - 32px);
             }
             
             textarea{
@@ -81,6 +84,7 @@
                 }
                 static print(content){
                     document.getElementById("content").innerHTML += "<br>"+content;
+                    document.getElementById("content").scrollTop = document.getElementById("content").scrollHeight;
                 }
                 static reset(content){
                     document.getElementById("content").innerHTML = "";

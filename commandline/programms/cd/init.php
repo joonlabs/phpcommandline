@@ -1,8 +1,8 @@
 <?php
     function cdMain($args, $command){
         lCommand::write("> $command");
-        if(count($args)==1){
-            $dir = $args[0];
+        if(count($args)>=1){
+            $dir = implode(" ", $args);
             $new_dir = change_dir($dir);
             if($new_dir!==false) lCommand::write("changed to ".$new_dir);
             else lCommand::write("this is not a directory");
