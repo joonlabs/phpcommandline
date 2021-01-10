@@ -57,8 +57,16 @@
                         CommandLine.historyindex = Math.max(-1, CommandLine.historyindex);
                         CommandLine.loadHistoryCommand();
                     }
+                    if(event.keyCode==9){
+                        event.preventDefault();
+                        CommandLine.getSuggestion();
+                    }
                 }
                 static sendCommand(command, pushToStack=true){
+                    if(command=="clear"){
+                        CommandLine.reset()
+                        return
+                    }
                     if(pushToStack) CommandLine.commandhistory.unshift(command);
                     let xhttp = new XMLHttpRequest();
                     xhttp.onreadystatechange = function() {
@@ -74,12 +82,27 @@
                 static print(content){
                     document.getElementById("content").innerHTML += "<br>"+content;
                 }
+                static reset(content){
+                    document.getElementById("content").innerHTML = "";
+                }
                 static loadHistoryCommand(){
                     if(CommandLine.historyindex==-1) document.getElementsByTagName('textarea')[0].value = "";
                     else document.getElementsByTagName('textarea')[0].value = CommandLine.commandhistory[CommandLine.historyindex];
                     document.getElementsByTagName('textarea')[0].focus();
                     document.getElementsByTagName('textarea')[0].setSelectionRange(document.getElementsByTagName('textarea')[0].value.length,document.getElementsByTagName('textarea')[0].value.length);
                 }
+                static getSuggestion(){
+                    let input = document.getElementsByTagName('textarea')[0].value
+                    let xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            let answer = JSON.parse(xhttp.responseText);
+                            console.log(answer);
+                            if(answer["return"]!=null) document.getElementsByTagName('textarea')[0].value += answer["return"];
+                        }
+                    };
+                    xhttp.open("GET", "commandline/autocomplete.php?input="+encodeURIComponent(input), true);
+                    xhttp.send();}
             }
             CommandLine.commandhistory = []; 
             CommandLine.historyindex = -1; 
@@ -88,6 +111,6 @@
     </head>
     <body ondblclick="document.getElementsByTagName('textarea')[0].focus();">
         <div id="content" class="content"></div>
-        <div class="input"><span>$</span><textarea autofocus rows="1" onkeydown="CommandLine.parseCommand(event);"></textarea></div>
+        <div class="input"><span>$</span><textarea autocomplete="off" spellcheck="false" autofocus rows="1" onkeydown="CommandLine.parseCommand(event);"></textarea></div>
     </body>
 </html>

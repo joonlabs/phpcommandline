@@ -3,12 +3,15 @@
         static $program = ".main";
         
         static function save($key, $value){
-            if(!isset($_SESSION["storage"][lStorage::$program])) $_SESSION["storage"][lStorage::$program] = [];
-            $_SESSION["storage"][lStorage::$program][$key] = $value;
+            if(!isset($_SESSION["phpcommandline"]["storage"][lStorage::$program])) $_SESSION["phpcommandline"]["storage"][lStorage::$program] = [];
+            $_SESSION["phpcommandline"]["storage"][lStorage::$program][$key] = $value;
         }
         
         static function get($key){
-            return $_SESSION["storage"][lStorage::$program][$key];
+            if(isset($_SESSION["phpcommandline"]["storage"][lStorage::$program])){
+                return $_SESSION["phpcommandline"]["storage"][lStorage::$program][$key];
+            }
+            return null;
         }
     }
 ?>

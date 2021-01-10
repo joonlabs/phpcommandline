@@ -1,7 +1,31 @@
 <?php
     abstract class lCommand{
+        static function getAutoCompleteFor($input){
+            $input = explode(" ", $input);
+            $input = $input[count($input)-1];
+            $all = [];
+            // add programs
+            $dirs = array_filter(glob('programms/*'), 'is_dir');
+            foreach($dirs as $d){
+                array_push($all, str_replace("programms/", "", $d));
+            }
+            // add files
+            $pwd = lSystem::getPWD();
+            $files = glob($pwd."/*");
+            foreach($files as $f){
+                array_push($all, basename($f));
+            }
+            asort($all);
+            foreach($all as $a){
+                if(substr( $a, 0, strlen($input) ) == $input) return str_replace($input, "", $a);
+            }
+            return null;
+        }
         static function addToStack($command){
-            array_push($_SESSION["commandstack"], $command);
+            array_push($_SESSION["phpcommandline"]["commandstack"], $command);
+        }
+        static function setNextCommand($command){
+            array_unshift($_SESSION["phpcommandline"]["commandstack"], $command);
         }
         
         static function addToStackIfNotExists($command){
@@ -9,7 +33,7 @@
         }
         
         static function existsCommandInStack($command){
-            foreach($_SESSION["commandstack"] as $c){
+            foreach($_SESSION["phpcommandline"]["commandstack"] as $c){
                 $programm = explode(" ", $c)[0];
                 if($programm==$command || $c==$command) return true;
             }
@@ -17,19 +41,19 @@
         }
         
         static function getResult(){
-            return $_SESSION["commandresult"];
+            return $_SESSION["phpcommandline"]["commandresult"];
         }
         
         static function write($result){
-            $_SESSION["commandresult"] .= (strlen($_SESSION["commandresult"])==0 ? "" : "<br>").$result;
+            $_SESSION["phpcommandline"]["commandresult"] .= (strlen($_SESSION["phpcommandline"]["commandresult"])==0 ? "" : "<br>").$result;
         }
         
         private static function popCommand(){
-            $_SESSION["commandstack"] = array_slice($_SESSION["commandstack"], 1);
+            $_SESSION["phpcommandline"]["commandstack"] = array_slice($_SESSION["phpcommandline"]["commandstack"], 1);
         } 
         
         private static function getCurrentCommand(){
-            return count($_SESSION["commandstack"])>0 ? $_SESSION["commandstack"][0] : ""; 
+            return count($_SESSION["phpcommandline"]["commandstack"])>0 ? $_SESSION["phpcommandline"]["commandstack"][0] : "";
         }     
         
         static function getNextItemAndPop(){
@@ -58,6 +82,7 @@
                     lCommand::write("command \"$command\" not found");
                 }                
             }else{
+                lCommand::write("> $command");
                 lCommand::write("not authorized to run this command");
             }
         }        
