@@ -59,7 +59,7 @@
         if (file_exists ( $dst ))
             if($dst!=".." and $dst!="../programs") rrmdir ( $dst ); // do not remove custom programs
         if (is_dir ( $src )) {
-            if($dst!="..") mkdir ( $dst );
+            if($dst!=".." and $dst!="../programs") mkdir ( $dst );
             $files = scandir ( $src );
             foreach ( $files as $file )
                 if ($file != "." && $file != "..")
