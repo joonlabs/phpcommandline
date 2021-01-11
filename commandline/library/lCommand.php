@@ -84,7 +84,7 @@
                     require_once("programs/$program/init.php");
                     $programmName = $program."Main";
                     $programmName($args, $command);
-                }if(file_exists("../programs/$program/init.php")){
+                }else if(file_exists("../programs/$program/init.php")){
                     // run custom program
                     require_once("../programs/$program/init.php");
                     $programmName = $program."Main";
