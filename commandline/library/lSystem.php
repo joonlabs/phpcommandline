@@ -1,5 +1,15 @@
 <?php
 abstract class lSystem{
+    static private $version = "0.1";
+
+    /*
+     * returns the current version
+     */
+    public static function getVersion()
+    {
+        return lSystem::$version;
+    }
+
     /*
      * returns the current directory
      */

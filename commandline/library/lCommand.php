@@ -5,9 +5,14 @@
             $input = $input[count($input)-1];
             $all = [];
             // add programs
-            $dirs = array_filter(glob('programms/*'), 'is_dir');
+            $dirs = array_filter(glob('programs/*'), 'is_dir');
             foreach($dirs as $d){
-                array_push($all, str_replace("programms/", "", $d));
+                array_push($all, str_replace("programs/", "", $d));
+            }
+            // add custom programs
+            $dirs = array_filter(glob('../programs/*'), 'is_dir');
+            foreach($dirs as $d){
+                array_push($all, str_replace("../programs/", "", $d));
             }
             // add files
             $pwd = lSystem::getPWD();
@@ -74,8 +79,14 @@
             // call command
             if($command=="") return;
             if(lConnection::isAuthorized() or $program=="login"){
-                if(file_exists("programms/$program/init.php")){
-                    require_once("programms/$program/init.php");
+                if(file_exists("programs/$program/init.php")){
+                    // run pre installed program
+                    require_once("programs/$program/init.php");
+                    $programmName = $program."Main";
+                    $programmName($args, $command);
+                }if(file_exists("../programs/$program/init.php")){
+                    // run custom program
+                    require_once("../programs/$program/init.php");
                     $programmName = $program."Main";
                     $programmName($args, $command);
                 }else{
