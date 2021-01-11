@@ -57,9 +57,9 @@
 
     function rcopy($src, $dst) {
         if (file_exists ( $dst ))
-            if($dst!=".." and $dst!="../programs") rrmdir ( $dst ); // do not remove custom programs
+            if($dst!=".." and $dst!="../programs" and $dst!="../users") rrmdir ( $dst ); // do not remove custom programs
         if (is_dir ( $src )) {
-            if($dst!=".." and $dst!="../programs") mkdir ( $dst );
+            if($dst!=".." and $dst!="../programs" and $dst!="../users") mkdir ( $dst );
             $files = scandir ( $src );
             foreach ( $files as $file )
                 if ($file != "." && $file != "..")
