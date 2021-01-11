@@ -16,7 +16,7 @@
         }
         
         static function authorize($username, $password){
-            $userfile = "users/$username.user";
+            $userfile = "../users/$username.user";
             if(file_exists($userfile) and file_get_contents($userfile)==$password){
                 $_SESSION["phpcommandline"]["authorized"] = true;
                 return true;
