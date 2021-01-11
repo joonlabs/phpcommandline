@@ -14,7 +14,7 @@
             #content{
                 position: absolute;
                 bottom: 50px;
-                max-height: calc(100vh - 50px);
+                height: calc(100vh - 50px);
                 overflow: auto;
                 width: calc(100% - 32px);
             }
@@ -83,7 +83,7 @@
                     xhttp.send();
                 }
                 static print(content){
-                    document.getElementById("content").innerHTML += "<br>"+content;
+                    document.getElementById("content").innerHTML += "\n"+content;
                     document.getElementById("content").scrollTop = document.getElementById("content").scrollHeight;
                 }
                 static reset(content){
@@ -102,7 +102,7 @@
                         if (this.readyState == 4 && this.status == 200) {
                             let answer = JSON.parse(xhttp.responseText);
                             console.log(answer);
-                            if(answer["return"]!=null) document.getElementsByTagName('textarea')[0].value += answer["return"];
+                            if(answer["return"]!=null && answer["return"]!="") document.getElementsByTagName('textarea')[0].value += answer["return"];
                         }
                     };
                     xhttp.open("GET", "commandline/autocomplete.php?input="+encodeURIComponent(input), true);
@@ -114,7 +114,7 @@
         </script>
     </head>
     <body ondblclick="document.getElementsByTagName('textarea')[0].focus();">
-        <div id="content" class="content"></div>
         <div class="input"><span>$</span><textarea autocomplete="off" spellcheck="false" autofocus rows="1" onkeydown="CommandLine.parseCommand(event);"></textarea></div>
+        <textarea disabled id="content" class="content"></textarea>
     </body>
 </html>

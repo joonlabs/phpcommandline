@@ -3,7 +3,7 @@
         lCommand::write("> $command");
         if(count($args)==1){
             if(lSystem::fileExists(lSystem::getPWD()."/".$args[0])){
-                lCommand::write(nl2br(htmlentities(file_get_contents(lSystem::getPWD()."/".$args[0]))));
+                lCommand::write(htmlentities(file_get_contents(lSystem::getPWD()."/".$args[0])));
             }else{
                 lCommand::write("file not found");
             }

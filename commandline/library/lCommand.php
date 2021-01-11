@@ -50,7 +50,7 @@
         }
         
         static function write($result){
-            $_SESSION["phpcommandline"]["commandresult"] .= (strlen($_SESSION["phpcommandline"]["commandresult"])==0 ? "" : "<br>").$result;
+            $_SESSION["phpcommandline"]["commandresult"] .= (strlen($_SESSION["phpcommandline"]["commandresult"])==0 ? "" : "\n").$result;
         }
         
         private static function popCommand(){

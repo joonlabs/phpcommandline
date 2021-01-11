@@ -1,15 +1,15 @@
 <?php
     function helpMain($args, $command){
         lCommand::write("> $command");
-        $content = "pre-installed programs:<br>";
+        $content = "pre-installed programs:\n";
         $dirs = array_filter(glob('programs/*'), 'is_dir');
         foreach($dirs as $i=>$s){
-            $content .= " - ".str_replace("programs/", "", $s).(($i<count($dirs)-1) ? "<br>" : "");
+            $content .= " - ".str_replace("programs/", "", $s).(($i<count($dirs)-1) ? "\n" : "");
         }
-        $content .= "<br>custom programs:<br>";
+        $content .= "\ncustom programs:\n";
         $dirs = array_filter(glob('../programs/*'), 'is_dir');
         foreach($dirs as $i=>$s){
-            $content .= " - ".str_replace("../programs/", "", $s).(($i<count($dirs)-1) ? "<br>" : "");
+            $content .= " - ".str_replace("../programs/", "", $s).(($i<count($dirs)-1) ? "\n" : "");
         }
         lCommand::write($content);    
     }
