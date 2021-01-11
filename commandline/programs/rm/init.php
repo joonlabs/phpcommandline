@@ -1,4 +1,7 @@
 <?php
+    use PHPCommandLine\lCommand;
+    use PHPCommandLine\lSystem;
+
     function rmMain($args, $command){
         lCommand::write("> $command");
         if(count($args)==1){

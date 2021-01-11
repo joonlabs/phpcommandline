@@ -1,4 +1,8 @@
 <?php
+    use PHPCommandLine\lCommand;
+    use PHPCommandLine\lConnection;
+    use PHPCommandLine\lStorage;
+
     function loginMain($args, $command){
         if(count($args)==0){
             lCommand::write("> login");
@@ -19,8 +23,6 @@
                     lCommand::write("welcome, ".$username);
                 }else{
                     lCommand::write("not authorized");
-//                    lCommand::addToStack("login");
-//                    lCommand::performNextCommand();
                 }
             }            
         }

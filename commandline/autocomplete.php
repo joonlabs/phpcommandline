@@ -1,14 +1,19 @@
 <?php
-require 'library/init.php';
-header("Content-Type: text/json;");
+    require 'library/init.php';
+    use PHPCommandLine\lCommand;
+    use PHPCommandLine\lConnection;
+    use PHPCommandLine\lJSON;
 
-lConnection::init();
+    // set answer to json
+    header("Content-Type: text/json;");
 
-$input = (isset($_GET["input"]) and $_GET["input"]!="") ? trim($_GET["input"]) : null;
-if(lConnection::isAuthorized()){
-    lJSON::dump(lCommand::getAutoCompleteFor($input));
-}else{
-    lJSON::dump(str_replace($input, "", "login"));
-}
+    lConnection::init();
+
+    $input = (isset($_GET["input"]) and $_GET["input"]!="") ? trim($_GET["input"]) : null;
+    if(lConnection::isAuthorized()){
+        lJSON::dump(lCommand::getAutoCompleteFor($input));
+    }else{
+        lJSON::dump(str_replace($input, "", "login"));
+    }
 
 ?>

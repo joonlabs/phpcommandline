@@ -1,4 +1,6 @@
 <?php
+    use PHPCommandLine\lCommand;
+
     function helpMain($args, $command){
         lCommand::write("> $command");
         $content = "pre-installed programs:\n";

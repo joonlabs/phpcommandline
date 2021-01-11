@@ -1,4 +1,7 @@
 <?php
+    use PHPCommandLine\lCommand;
+    use PHPCommandLine\lSystem;
+
     function moreMain($args, $command){
         lCommand::write("> $command");
         if(count($args)==1){

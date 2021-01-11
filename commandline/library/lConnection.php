@@ -1,4 +1,6 @@
 <?php
+    namespace PHPCommandLine;
+
     abstract class lConnection{
         static function init(){
             session_start();

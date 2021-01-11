@@ -1,19 +1,24 @@
 <?php
-require 'library/init.php';
-header("Content-Type: text/json;");
+    require 'library/init.php';
+    use PHPCommandLine\lCommand;
+    use PHPCommandLine\lConnection;
+    use PHPCommandLine\lJSON;
 
-lConnection::init();
+    // set answer to json
+    header("Content-Type: text/json;");
 
-$command = (isset($_GET["command"]) and $_GET["command"]!="") ? trim($_GET["command"]) : null;
-if($command!=null){
-    if($command=="init"){
-        if(!lConnection::isAuthorized()) lCommand::write("welcome to the php command line. please login via the command \"login\"");
-    }else{
-        lCommand::addToStack($command);
+    lConnection::init();
+
+    $command = (isset($_GET["command"]) and $_GET["command"]!="") ? trim($_GET["command"]) : null;
+    if($command!=null){
+        if($command=="init"){
+            if(!lConnection::isAuthorized()) lCommand::write("welcome to the php command line. please login via the command \"login\"");
+        }else{
+            lCommand::addToStack($command);
+        }
     }
-}
 
-lCommand::performNextCommand();
+    lCommand::performNextCommand();
 
-lJSON::dump(lCommand::getResult());
+    lJSON::dump(lCommand::getResult());
 ?>

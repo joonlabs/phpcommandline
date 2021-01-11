@@ -1,4 +1,6 @@
 <?php
+    use PHPCommandLine\lCommand;
+
     function logoutMain($args, $command){
         lCommand::write("> logout");
         lCommand::write("logged out successfully. bye.");

@@ -1,4 +1,7 @@
 <?php
+    use PHPCommandLine\lCommand;
+    use PHPCommandLine\lSystem;
+
     function lsMain($args, $command){
         lCommand::write("> $command");
         $files = scandir(lSystem::getPWD());

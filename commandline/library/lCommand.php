@@ -1,4 +1,6 @@
 <?php
+    namespace PHPCommandLine;
+
     abstract class lCommand{
         static function getAutoCompleteFor($input){
             $input = explode(" ", $input);

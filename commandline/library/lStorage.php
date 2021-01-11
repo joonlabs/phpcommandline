@@ -1,4 +1,6 @@
 <?php
+    namespace PHPCommandLine;
+
     abstract class lStorage{
         static $program = ".main";
         

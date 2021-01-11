@@ -1,4 +1,6 @@
 <?php
+namespace PHPCommandLine;
+
 abstract class lSystem{
     static private $version = "0.1";
 
