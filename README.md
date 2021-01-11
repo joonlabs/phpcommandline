@@ -3,10 +3,10 @@ A web command line interface, that can run php programs on server side. It provi
 You can build you own, or link your existing programs to this browser based command line to run them from your browser. 
 
 ## install
-Clone or download the repository and place it inside the folder on the server from where you want to use it - e.g. /myphpcommandline/.
+Clone or download the repository and place it inside the folder on the server from where you want to use it - e.g. ```/myphpcommandline/```.
 
 ## setup
-When installed, the tool does not provide any logins. However you can simply add one by placing a "username.user" file in the /commandline/user/ folder with the password of this user as file content.
+When installed, the tool does not provide any logins. However you can simply add one by placing a "username.user" file in the ```/user/``` folder with the password of this user as file content.
 
 ## usage
 once followed the steps above, simply open the url of the directory in a browser and type ```login```. You can now login with the username and password created above.  
@@ -23,10 +23,11 @@ once followed the steps above, simply open the url of the directory in a browser
 - pwd
 - reset
 - rm
-- toich
+- touch
+- update
 
 ## building own programs
-you can build (or link) your own programs by creating a dir in the /commandline/programs/ with the name of you program. This dir should countain a init.php file with a method named after following scheme: 
+you can build (or link) your own programs by creating a dir in the ```/programs/``` folder with the name of your program. This dir should countain a init.php file with a method named after following scheme: 
 
 ```php
 function [yourprogramname]Main($args, $command) {
