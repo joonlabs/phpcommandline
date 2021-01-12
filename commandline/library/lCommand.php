@@ -84,12 +84,12 @@
                 if(file_exists("programs/$program/init.php")){
                     // run pre installed program
                     require_once("programs/$program/init.php");
-                    $programmName = $program."Main";
+                    $programmName = str_replace("-","_", $program)."Main";
                     $programmName($args, $command);
                 }else if(file_exists("../programs/$program/init.php")){
                     // run custom program
                     require_once("../programs/$program/init.php");
-                    $programmName = $program."Main";
+                    $programmName = str_replace("-","_", $program)."Main";
                     $programmName($args, $command);
                 }else{
                     lCommand::write("command \"$command\" not found");
