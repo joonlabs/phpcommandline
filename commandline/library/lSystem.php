@@ -53,10 +53,35 @@ abstract class lSystem{
     }
 
     /*
-     * returns the if a file exists
+     * unlinks a file exists
+     */
+    static function rmFile($file){
+        unlink($file);
+    }
+
+    /*
+     * returns the if a directory exists
      */
     static function dirExists($dir){
         return is_dir($dir);
+    }
+
+    /*
+     * removes a directory exists
+     */
+    static function rmDir($dir){
+        if (substr($dir, strlen($dir) - 1, 1) != '/') {
+            $dir .= '/';
+        }
+        $files = glob($dir . '*', GLOB_MARK);
+        foreach ($files as $file) {
+            if (is_dir($file)) {
+                self::rmDir($file);
+            } else {
+                unlink($file);
+            }
+        }
+        rmdir($dir);
     }
 }
 ?>
