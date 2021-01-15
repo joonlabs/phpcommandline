@@ -15,7 +15,7 @@
             }else{
                 lCommand::write("this file does not exists");
             }
-        }else if(count($args)==1) {
+        }else if(count($args)==2) {
             if($args[0]=="-rf"){
                 $dir = lSystem::getPWD()."/".$args[1];
                 if(lSystem::dirExists($dir)){
