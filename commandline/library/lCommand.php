@@ -23,8 +23,30 @@
                 array_push($all, basename($f));
             }
             asort($all);
+            $candidates = [];
             foreach($all as $a){
-                if(substr( $a, 0, strlen($input) ) == $input) return str_replace($input, "", $a);
+                if(substr( $a, 0, strlen($input) ) == $input){
+                    $candidates[] = str_replace($input, "", $a);
+                }
+            }
+            if(count($candidates)>0){
+                $suggestion = "";
+                $smallestLengt = array_reduce($candidates, function($carry, $item){
+                    return (strlen($item)<$carry or $carry===-1) ? strlen($item) : $carry;
+                }, -1);
+                $charAtPositionInAllSuggestionsSame = true;
+                for($i=0; $i<$smallestLengt; $i++){
+                    $charAtPosition = $candidates[0][$i];
+                    foreach($candidates as $c){
+                        if($c[$i]!==$charAtPosition) $charAtPositionInAllSuggestionsSame = false;
+                    }
+                    if(!$charAtPositionInAllSuggestionsSame){
+                        return $suggestion;
+                    }else{
+                        $suggestion .= $charAtPosition;
+                    }
+                }
+                return $suggestion;
             }
             return null;
         }
