@@ -2,7 +2,7 @@
 namespace PHPCommandLine;
 
 abstract class lSystem{
-    static private $version = "0.1";
+    static private $version = "0.2";
 
     /*
      * returns the current version
